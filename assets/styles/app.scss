@@ -1,0 +1,251 @@
+@import 'helper/variables';
+
+@import "~bootstrap/scss/bootstrap.scss";
+@import '~@fortawesome/fontawesome-free';
+@import '~@fortawesome/fontawesome-free/css/regular.css';
+@import '~@fortawesome/fontawesome-free/css/solid.css';
+@import '~@fontsource/roboto';
+
+@import 'layout/header';
+@import 'layout/footer';
+@import 'components/sidebar';
+
+*, ::after, ::before {
+  box-sizing: border-box;
+}
+body {
+  background: $bg-light-grey;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  min-height: 100vh;
+  color: $clr-dark-grey;
+  font-size: 14px;
+}
+a {
+  color: initial;
+  text-decoration: none;
+}
+a:hover {
+  color: initial;
+  text-decoration: none;
+}
+.d-flex-jcb-aic{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.d-flex-jcs-aic{
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+.link-title {
+  font-size: 0.7rem;
+  padding: 0.3rem 0.5rem;
+}
+.menu-bar {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+}
+.clr-white {
+  color: $clr-white;
+}
+.form-block {
+  max-width: 600px;
+  margin-left: 0;
+}
+.block-content {
+  background: white;
+  padding: 1rem 1rem;
+  border-radius: $border-radius;
+  margin: 1rem;
+  box-shadow: 0 0 7px -4px;
+}
+#form-page .block-content {
+  margin: 1rem;
+}
+.block-title-mobile {
+  padding: 0.5rem;
+  text-align: center;
+  background: #8e7d3a;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+.block-title-mobile, .block-title-mobile i {
+  color: white;
+}
+.block-title-mobile .link-title, .block-title-mobile .link-title i {
+  background: white;
+  border: white;
+  color: #8e7d3a;
+}
+.block-section-title {
+  padding: 0.5rem;
+}
+.btn-primary {
+  color: white;
+  background: #5fb65c;
+  border: 1px solid #5fb65c;
+}
+.btn-primary:hover {
+  background: #399336;
+  border: 1px solid #399336;
+}
+.btn-outline-danger {
+  color: #d63333;
+  border: 1px solid #d63333;
+}
+.btn-outline-danger:hover {
+  background: #b52323;
+  border: 1px solid #b52323;
+}
+.btn-outline-warning {
+  color: #e7a11b;
+  border: 1px solid #e7a11b;
+}
+.btn-outline-warning:hover {
+  color: white;
+  background: #e7a11b;
+  border: 1px solid #e7a11b;
+}
+h1, .h1 {
+  font-size: 1.2rem;
+  margin: 0;
+}
+h2, .h2 {
+  font-size: 1rem;
+  margin: 0;
+  text-align: left;
+}
+h3, .h3 {
+  font-size: 0.8rem;
+  margin: 1rem 0;
+}
+.block-container-content {
+  padding: 1rem;
+}
+.card-title {
+  margin-bottom: 1rem;
+}
+.card-text {
+  margin: 0 0 0.5rem 0;
+}
+.title-icon {
+  width: 20px;
+  height: auto;
+  margin-right: 0.5rem;
+}
+table td {
+  vertical-align: middle;
+}
+.label-text {
+  font-weight: bold;
+}
+.circle-stat {
+  border: 2px solid $clr-grey;
+  border-radius: 10px;
+  padding: 1rem;
+}
+.link, .link:hover {
+  text-decoration: underline;
+  text-underline-position: under;
+  color: #2dabd8;
+}
+.block-content .row +.row {
+  margin-top: 0rem;
+}
+button.close {
+  background: none;
+  border: 1px solid;
+  border: none;
+}
+.dropzone-container {
+  border-radius: 10px;
+}
+.dateField {
+  display: flex;
+}
+.dateField .input-group:nth-child(1n+0){
+  margin-right: 1rem;
+}
+.form-select {
+  padding: 0.5rem;
+}
+.fc .fc-button-group>.fc-button {
+  padding: 0.2rem 0.4rem;
+}
+.fc .fc-toolbar-title {
+  font-size: 1rem !important;
+}
+.fc .fc-scrollgrid-section-header.fc-scrollgrid-section-sticky>* {
+  position: initial;
+}
+#chart {
+  min-height: 400px;
+}
+.form-switch {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 0;
+}
+input.validate-payment {
+  height: 1.4rem;
+  width: 2.5rem !important;
+  margin-left: 0 !important;
+}
+.label-form-switch {
+  padding: 4px;
+  display: flex;
+}
+.card p {
+  margin: 0 0 0.2rem 0;
+}
+.block-content-mobile {
+  margin: 0.7rem;
+}
+.card-mobile {
+  box-shadow: 0 0 10px -6px;
+}
+
+@media (min-width: 768px) {
+  .title-icon {
+    width: 30px;
+  }
+  .block-content {
+    padding: 1rem 2rem;
+  }
+  .link-title {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.5rem;
+  }
+  .block-title {
+    padding: 1rem 1rem 0 1rem;
+    text-align: center;
+    background: none;
+    position: initial;
+  }
+  #form-page .block-content {
+    margin: 1rem auto;
+  }
+  h1, .h1 {
+    font-size: 1.5rem;
+    margin: 0;
+  }
+  h2, .h2 {
+    font-size: 1.2rem;
+    margin: 0;
+    text-align: left;
+  }
+  h3, .h3 {
+    font-size: 1rem;
+    margin: 1rem 0;
+  }
+  .fc .fc-button-group > .fc-button {
+    padding: 0.4rem 0.5rem;
+  }
+  .fc .fc-toolbar-title {
+    font-size: 1.5rem;
+  }
+}
