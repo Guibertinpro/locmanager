@@ -1,9 +1,8 @@
 {
-  "build/app.css": "/build/app.css",
-  "build/app.js": "/build/app.js",
-  "build/runtime.js": "/build/runtime.js",
-  "build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_symfony_ux-autocomple-ddfc52.css": "/build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_symfony_ux-autocomple-ddfc52.css",
-  "build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_symfony_ux-autocomple-ddfc52.js": "/build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_symfony_ux-autocomple-ddfc52.js",
+  "build/app.css": "/build/app.eac95371.css",
+  "build/app.js": "/build/app.b2aa31d5.js",
+  "build/runtime.js": "/build/runtime.f3cfc5bd.js",
+  "build/369.f4ea039a.css": "/build/369.f4ea039a.css",
   "build/images/valmorellabelle.jpeg": "/build/images/valmorellabelle.jpeg",
   "build/fonts/fa-solid-900.ttf": "/build/fonts/fa-solid-900.2877d54f.ttf",
   "build/fonts/fa-solid-900.woff2": "/build/fonts/fa-solid-900.bdb9e232.woff2",
