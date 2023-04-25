@@ -33,8 +33,8 @@
               <td>{{ reservation.apartment.name }}</td>
               <td>{{ reservation.client.firstname|first }}.{{ reservation.client.lastname }}</td>
               <td>
-                {{ reservation.startAt|format_datetime(locale='fr',pattern="dd MMMM YYYY") }} <br/>
-                {{ reservation.endAt|format_datetime(locale='fr',pattern="dd MMMM YYYY") }}
+                {{ reservation.startAt|format_date(locale='fr') }} <br/>
+                {{ reservation.endAt|format_date(locale='fr') }}
               </td>
               <td>{{ reservation.price|format_currency('EUR', {rounding_mode: 'floor'}) }}</td>
               <td>{% if reservation.getContractFile != null %}<span style="background-color: #42c66a; padding:0.2rem 0.5rem; color:white; border-radius:10px;">Contrat signé</span>{% else %}<span style="background-color: #c24f19; padding:0.2rem 0.5rem; color:white; border-radius:10px;">Pas de contrat</span>{% endif %}
