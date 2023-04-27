@@ -5,8 +5,11 @@ namespace App\Entity;
 use App\Repository\ReservationRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: ReservationRepository::class)]
+#[Vich\Uploadable]
 class Reservation
 {
     #[ORM\Id]
@@ -61,6 +64,19 @@ class Reservation
 
     #[ORM\Column]
     private ?bool $soldeValidated = false;
+
+    // NOTE: This is not a mapped field of entity metadata, just a simple property.
+    #[Vich\UploadableField(mapping: 'reservations', fileNameProperty: 'pdfName', size: 'pdfSize')]
+    private ?File $pdfFile = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?string $pdfName = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $pdfSize = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $updatedAt = null;
 
     public function getId(): ?int
     {
@@ -255,5 +271,53 @@ class Reservation
         $this->soldeValidated = $soldeValidated;
 
         return $this;
+    }
+
+    public function setPdfFile(?File $pdfFile = null): void
+    {
+        $this->pdfFile = $pdfFile;
+
+        if (null !== $pdfFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getPdfFile(): ?File
+    {
+        return $this->pdfFile;
+    }
+
+    public function setPdfName(?string $pdfName): void
+    {
+        $this->pdfName = $pdfName;
+    }
+
+    public function getPdfName(): ?string
+    {
+        return $this->pdfName;
+    }
+
+    public function setPdfSize(?int $pdfSize): void
+    {
+        $this->pdfSize = $pdfSize;
+    }
+
+    public function getPdfSize(): ?int
+    {
+        return $this->pdfSize;
+    }
+
+    public function setUploadedAt(?\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
     }
 }

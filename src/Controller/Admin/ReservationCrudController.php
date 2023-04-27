@@ -13,6 +13,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class ReservationCrudController extends AbstractCrudController
 {
@@ -63,6 +65,7 @@ class ReservationCrudController extends AbstractCrudController
                     ->hideOnIndex(),
                 
                 AssociationField::new('contractFile', 'Contrat')->hideOnIndex(),
+                TextAreaField::new('pdfFile')->setFormType(VichFileType::class)->hideOnIndex(),
                 AssociationField::new('state', 'Statut')->onlyOnIndex(),
         ];
     }
