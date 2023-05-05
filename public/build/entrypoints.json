@@ -3,11 +3,19 @@
     "app": {
       "js": [
         "/build/runtime.f3cfc5bd.js",
-        "/build/app.b2aa31d5.js"
+        "/build/755.b814c449.js",
+        "/build/app.50cb5059.js"
       ],
       "css": [
         "/build/369.f4ea039a.css",
         "/build/app.b84eabf2.css"
+      ]
+    },
+    "admin": {
+      "js": [
+        "/build/runtime.f3cfc5bd.js",
+        "/build/755.b814c449.js",
+        "/build/admin.e7d2e424.js"
       ]
     }
   }
