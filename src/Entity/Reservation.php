@@ -66,7 +66,7 @@ class Reservation
     private ?bool $soldeValidated = false;
 
     // NOTE: This is not a mapped field of entity metadata, just a simple property.
-    #[Vich\UploadableField(mapping: 'reservations', fileNameProperty: 'pdfName', size: 'pdfSize')]
+    #[Vich\UploadableField(mapping: 'contrats', fileNameProperty: 'pdfName', size: 'pdfSize')]
     private ?File $pdfFile = null;
 
     #[ORM\Column(nullable: true)]
@@ -320,4 +320,5 @@ class Reservation
     {
         return $this->updatedAt;
     }
+
 }
