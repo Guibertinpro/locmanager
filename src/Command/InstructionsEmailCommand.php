@@ -113,6 +113,7 @@ class InstructionsEmailCommand extends Command
         $email = (new TemplatedEmail())
           ->from(new Address($emailAdmin, 'Séjours evasion'))
           ->to($clientEmail)
+          ->cc($emailAdmin)
           ->subject('Votre séjour à ' . ucfirst($reservation->getApartment()->getName()) . ' démarre bientôt')
           ->addPart(new DataPart(new File($filePath), 'Consignes du séjour'))
           ->htmlTemplate($template)

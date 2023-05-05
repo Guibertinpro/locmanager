@@ -289,4 +289,63 @@ class ReservationController extends AbstractController
 
     return new JsonResponse($data);
   }
+
+  #[Route('reservation/send-instructions/{id}', name: 'app_reservation_send_instructions', requirements: ['id' => '\d+'])]
+  public function sendInstructions(int $id, ReservationRepository $reservationRepository, MailerInterface $mailer, EntityManagerInterface $em, ConfigurationRepository $conf, ReservationStateRepository $reservationStateRepository)
+  {
+    $reservation = $reservationRepository->find($id);
+    $apartment = strtolower($reservation->getApartment()->getName());
+    $clientEmail = $reservation->getClient()->getEmail();
+    $emailAdmin = $conf->find('1')->getValue();
+    $idStateInstructionsSend = $conf->find('5')->getValue();
+    $stateInstructionsSend = $reservationStateRepository->find($idStateInstructionsSend);
+    $apartment = strtolower($reservationRepository->find($reservation->getId())->getApartment()->getName());
+        
+    $file = 'consignes-' . $apartment . '.pdf';
+    $filePath = $this->getParameter('kernel.project_dir') . '/public/uploads/instructions/' . $file;
+
+    // Get the good template
+    $template = null;
+    switch ($apartment) {
+      case 'capbreton':
+        $template = 'emails/send-instructions/capbreton.html.twig';
+        break;
+      case 'carnac':
+        $template = 'emails/send-instructions/carnac.html.twig';
+        break;
+      case 'valmorel':
+        $template = 'emails/send-instructions/valmorel.html.twig';
+        break;
+      case 'moliets':
+        $template = 'emails/send-instructions/moliets.html.twig';
+        break;
+      
+      default:
+        $template = 'emails/send-instructions/base.html.twig';
+        break;
+    }
+
+    $email = (new TemplatedEmail())
+      ->from(new Address($emailAdmin, 'Séjours evasion'))
+      ->to($clientEmail)
+      ->cc($emailAdmin)
+      ->subject('Votre séjour à ' . ucfirst($reservation->getApartment()->getName()) . ' démarre bientôt')
+      ->addPart(new DataPart(new File($filePath), 'Consignes du séjour'))
+      ->htmlTemplate($template)
+      ->context([
+        'reservation' => $reservation,
+      ]);
+
+    try {
+      $mailer->send($email);
+      $reservation->setState($stateInstructionsSend);
+      $em->persist($reservation);
+      $em->flush();
+
+      return $this->redirectToRoute('app_reservation_view', ['id' => $id]);
+
+    } catch (TransportExceptionInterface $e) {
+      echo $e->getMessage();
+    }
+  }
 }
