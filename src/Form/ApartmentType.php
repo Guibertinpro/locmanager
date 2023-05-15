@@ -35,8 +35,8 @@ class ApartmentType extends AbstractType
             ->add('surface', TextType::class, ['label' => 'Surface'])
             ->add('pets', ChoiceType::class, [
                     'choices' => [
-                        'Non' => 'non',
-                        'Oui' => 'oui',
+                        'Non' => 'no',
+                        'Oui' => 'yes',
                     ],
                     'label' => 'Animaux autorisés'
                 ])
