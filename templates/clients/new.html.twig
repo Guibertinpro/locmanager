@@ -23,6 +23,7 @@
   {% endblock %}
   <div class="block-content form-block">
     {{ form_start(form) }}
+      {{ form_row(form.civility) }}
       <div class="d-flex justify-content-between align-items-center">
         {{ form_row(form.firstname) }}
         {{ form_row(form.lastname) }}

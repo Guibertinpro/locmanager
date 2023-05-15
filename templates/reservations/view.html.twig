@@ -40,7 +40,7 @@
               <a href="{{ path('app_client_view', {'id': client.id}) }}" class="btn btn-primary btn-sm me-3"><i class="fa-solid fa-user btn-title-icon me-2"></i>Fiche client</a>
             </div>
             <div class="card-text block-client-reservation">
-              <p class="m-2">{{ client.firstname }} {{ client.lastname }}</p>
+              <p class="m-2">{{ client.civility }}. {{ client.firstname }} {{ client.lastname }}</p>
               <p class="m-2"><a class="link" href="mailto:{{ client.email }}">{{ client.email }}</a></p>
               <p class="m-2">{{ client.phone }}</p>
               <p class="m-2">{{ client.address }}</p>

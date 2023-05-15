@@ -16,6 +16,9 @@ class Client
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    private ?string $civility = null;
+
+    #[ORM\Column(length: 255)]
     private ?string $firstname = null;
 
     #[ORM\Column(length: 255)]
@@ -53,6 +56,18 @@ class Client
     public function getId(): ?int
     {
         return $this->id;
+    }
+    
+    public function getCivility(): ?string
+    {
+        return $this->civility;
+    }
+
+    public function setCivility(string $civility): self
+    {
+        $this->civility = $civility;
+
+        return $this;
     }
 
     public function getFirstname(): ?string
