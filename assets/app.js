@@ -6,7 +6,6 @@ import 'popper.js';
 import 'fullcalendar';
 
 const $ = require('jquery');
-
 $(function () {
 
   if ($(document).width() >= 768) {
@@ -20,9 +19,9 @@ $(function () {
   }
 
   // Set field Arrhes to 30% of price per default
-  const priceField = $("#reservation_price");
-  const arrhesField = $("#reservation_arrhes");
-  const leftToPayField = $("#reservation_leftToPay");
+  const priceField = $("#Reservation_price");
+  const arrhesField = $("#Reservation_arrhes");
+  const leftToPayField = $("#Reservation_leftToPay");
   let arrhes = 0;
   let leftToPay = 0;
   priceField.on('change', () => {
