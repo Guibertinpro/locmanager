@@ -5,7 +5,6 @@ namespace App\Controller\Admin;
 use App\Entity\Reservation;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Asset;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -15,6 +14,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\PropertyAccess\PropertyPath;
@@ -29,8 +29,40 @@ class ReservationCrudController extends AbstractCrudController
 
     public function configureActions(Actions $actions): Actions
     {
+        // View contract action
+        $viewContract = Action::new('viewContract', 'Voir le contrat de réservation original', 'fa fa-eye')->linkToRoute('app_reservation_pdf_download', function (Reservation $reservation): array {
+            return [
+                'id' => $reservation->getId(),
+            ];
+        });
+
+        // Send contract action
+        $sendContract = Action::new('sendContract', 'Envoyer le contrat par mail', 'fa fa-paper-plane')->linkToRoute('app_reservation_send_contract', function (Reservation $reservation): array {
+            return [
+                'id' => $reservation->getId(),
+            ];
+        });
+
+        // Send instructions action
+        $sendInstructions = Action::new('sendInstructions', 'Envoyer les consignes', 'fa fa-paper-plane')->linkToRoute('app_reservation_send_instructions', function (Reservation $reservation): array {
+            return [
+                'id' => $reservation->getId(),
+            ];
+        });
+
         return $actions
             ->add(Crud::PAGE_INDEX, Action::DETAIL)
+            ->add(Crud::PAGE_DETAIL, $viewContract)
+            ->add(Crud::PAGE_DETAIL, $sendContract)
+            ->add(Crud::PAGE_DETAIL, $sendInstructions)
+            ->update(Crud::PAGE_DETAIL, Action::EDIT, function(Action $action) {
+                return $action->setLabel('')->setIcon('fa fa-edit');
+            })
+            ->update(Crud::PAGE_DETAIL, Action::DELETE, function(Action $action) {
+                return $action->setLabel('')->setIcon('fa fa-trash');
+            })
+            ->remove(Crud::PAGE_DETAIL, Action::INDEX)
+            ->reorder(Crud::PAGE_DETAIL, ['viewContract', 'sendContract', 'sendInstructions', Action::EDIT, Action::DELETE])
         ;
     }
 
@@ -59,17 +91,13 @@ class ReservationCrudController extends AbstractCrudController
 
         } elseif(Crud::PAGE_DETAIL === $pageName) {
             return [
-                FormField::addPanel('Détails client'),
-                    AssociationField::new('client', 'Client'),
-                    AssociationField::new('apartment', 'Appartement'),
+                FormField::addPanel('Détails réservation'),
+                    AssociationField::new('state', 'Statut')->setTemplatePath("admin/fields/detail_reservation_state.html.twig"),
                     DateTimeField::new('startAt', 'Début')->setFormat('medium'),
                     DateTimeField::new('endAt', 'Fin')->setFormat('medium'),
-                
-                FormField::addPanel('Détails réservation'),
-                    AssociationField::new('state', 'Statut'),
-                    BooleanField::new('cautionValidated', 'Caution'),
-                    BooleanField::new('arrhesValidated', 'Arrhes'),
-                    BooleanField::new('soldeValidated', 'Solde'),
+                    BooleanField::new('cautionValidated', 'Caution reçue'),
+                    BooleanField::new('arrhesValidated', 'Arrhes reçues'),
+                    BooleanField::new('soldeValidated', 'Solde reçu'),
                     MoneyField::new('price', 'Prix')
                         ->setStoredAsCents(false)
                         ->setCurrency('EUR'),
@@ -79,10 +107,16 @@ class ReservationCrudController extends AbstractCrudController
                     MoneyField::new('leftToPay', 'Solde')
                         ->setCurrency('EUR')
                         ->setStoredAsCents(false),
-                    TextareaField::new('pdfFile', 'Contrat PDF')
-                        ->setFormType(VichFileType::class)
-                        ->onlyOnForms(),
+                    DateTimeField::new('dateLeftToPay', 'Date limite réception caution et solde')->setFormat('medium'),
                     TextField::new('pdfName', 'Contrat PDF')->setTemplatePath("admin/fields/detail_contract_link.html.twig"),
+
+                FormField::addPanel('Détails client'),
+                    AssociationField::new('client', 'Nom'),
+                    AssociationField::new('apartment', 'Appartement'),
+                    NumberField::new('nbOfAdults', 'Nombre d\'adultes'),
+                    NumberField::new('nbOfChildren', 'Nombre d\'enfants'),
+                    
+                
             ];
 
         } else {
@@ -125,6 +159,16 @@ class ReservationCrudController extends AbstractCrudController
     {
         return $assets
             ->addWebpackEncoreEntry('admin')
+        ;
+    }
+
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setDefaultSort(['id' => 'DESC'])
+            ->setEntityLabelInPlural('Réservations')
+            ->setPageTitle('detail',
+                fn (Reservation $reservation) => sprintf('Réservation n°%s', $reservation->getId()))
         ;
     }
 

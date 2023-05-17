@@ -1,0 +1,11 @@
+<table>
+  <tr>
+{% for value in field.value %}
+  <td class="me-3">Numéro {{ value.id }} | </td>
+  <td class="me-3">{{ value.apartment }} | </td>
+  <td class="me-3">{{ value.startAt|date("d/m/Y") }} | </td>
+  <td class="me-3">{{ value.endAt|date("d/m/Y") }} | </td>
+  <td class="me-3">Prix: {{ value.price }}</td>
+{% endfor %}
+  </tr>
+</table>
