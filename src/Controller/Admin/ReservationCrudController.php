@@ -27,6 +27,23 @@ class ReservationCrudController extends AbstractCrudController
         return Reservation::class;
     }
 
+    public function configureAssets(Assets $assets): Assets
+    {
+        return $assets
+            ->addWebpackEncoreEntry('reservation')
+        ;
+    }
+
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setDefaultSort(['id' => 'DESC'])
+            ->setEntityLabelInPlural('Réservations')
+            ->setPageTitle('detail',
+                fn (Reservation $reservation) => sprintf('Réservation n°%s', $reservation->getId()))
+        ;
+    }
+
     public function configureActions(Actions $actions): Actions
     {
         // View contract action
@@ -52,6 +69,9 @@ class ReservationCrudController extends AbstractCrudController
 
         return $actions
             ->add(Crud::PAGE_INDEX, Action::DETAIL)
+            ->update(Crud::PAGE_INDEX, Action::NEW, function(Action $action) {
+                return $action->setLabel('Créer une nouvelle réservation');
+            })
             ->add(Crud::PAGE_DETAIL, $viewContract)
             ->add(Crud::PAGE_DETAIL, $sendContract)
             ->add(Crud::PAGE_DETAIL, $sendInstructions)
@@ -143,7 +163,7 @@ class ReservationCrudController extends AbstractCrudController
                     MoneyField::new('leftToPay', 'Solde')
                         ->setCurrency('EUR')
                         ->setStoredAsCents(false),
-                    TextareaField::new('pdfFile', 'Contrat PDF')
+                    TextareaField::new('pdfFile', 'Contrat signé')
                         ->setFormType(VichFileType::class)
                         ->setFormTypeOptions(
                             [
@@ -153,23 +173,6 @@ class ReservationCrudController extends AbstractCrudController
                             ]),
             ];
         }
-    }
-
-    public function configureAssets(Assets $assets): Assets
-    {
-        return $assets
-            ->addWebpackEncoreEntry('admin')
-        ;
-    }
-
-    public function configureCrud(Crud $crud): Crud
-    {
-        return $crud
-            ->setDefaultSort(['id' => 'DESC'])
-            ->setEntityLabelInPlural('Réservations')
-            ->setPageTitle('detail',
-                fn (Reservation $reservation) => sprintf('Réservation n°%s', $reservation->getId()))
-        ;
     }
 
 }

@@ -1,0 +1,27 @@
+@import 'helper/variables';
+
+@import 'layout/header';
+@import 'layout/footer';
+
+*, ::after, ::before {
+  box-sizing: border-box;
+}
+.block-content {
+  background: white;
+  padding: 1rem 1rem;
+  border-radius: $border-radius;
+  margin: 1rem;
+  box-shadow: 0 0 7px -4px;
+}
+#chart {
+  min-height: 400px;
+}
+.block-content-mobile {
+  margin: 0.7rem;
+}
+
+@media (min-width: 768px) {
+  .block-content {
+    padding: 1rem 2rem;
+  }
+}

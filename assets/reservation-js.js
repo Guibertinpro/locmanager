@@ -1,8 +1,3 @@
-import './styles/admin.scss';
-import './bootstrap';
-import 'popper.js';
-import 'fullcalendar';
-
 $(function () {
 
   // Set field Arrhes to 30% of price per default

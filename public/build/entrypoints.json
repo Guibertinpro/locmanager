@@ -1,21 +1,21 @@
 {
   "entrypoints": {
-    "app": {
-      "js": [
-        "/build/runtime.f3cfc5bd.js",
-        "/build/755.b814c449.js",
-        "/build/app.50cb5059.js"
-      ],
-      "css": [
-        "/build/369.f4ea039a.css",
-        "/build/app.b84eabf2.css"
-      ]
-    },
     "admin": {
       "js": [
-        "/build/runtime.f3cfc5bd.js",
+        "/build/runtime.188fa053.js",
         "/build/755.b814c449.js",
-        "/build/admin.e7d2e424.js"
+        "/build/598.9284aa0f.js",
+        "/build/admin.0caa52e6.js"
+      ],
+      "css": [
+        "/build/admin.7c1cb692.css"
+      ]
+    },
+    "reservation": {
+      "js": [
+        "/build/runtime.188fa053.js",
+        "/build/755.b814c449.js",
+        "/build/reservation.6d7f2084.js"
       ]
     }
   }
