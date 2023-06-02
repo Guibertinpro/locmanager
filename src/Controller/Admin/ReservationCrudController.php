@@ -118,6 +118,8 @@ class ReservationCrudController extends AbstractCrudController
                     BooleanField::new('cautionValidated', 'Caution reçue'),
                     BooleanField::new('arrhesValidated', 'Arrhes reçues'),
                     BooleanField::new('soldeValidated', 'Solde reçu'),
+                    NumberField::new('nbOfAdults', 'Nombre d\'adultes'),
+                    NumberField::new('nbOfChildren', 'Nombre d\'enfants'),
                     MoneyField::new('price', 'Prix')
                         ->setStoredAsCents(false)
                         ->setCurrency('EUR'),
@@ -154,8 +156,8 @@ class ReservationCrudController extends AbstractCrudController
                     BooleanField::new('cautionValidated', 'Caution')->setColumns(4),
                     BooleanField::new('arrhesValidated', 'Arrhes')->setColumns(4),
                     BooleanField::new('soldeValidated', 'Solde')->setColumns(4),
-                    TextField::new('nbOfAdults', 'Nombre d\'adultes'),
-                    TextField::new('nbOfChildren', 'Nombre d\'enfants'),
+                    NumberField::new('nbOfAdults', 'Nombre d\'adultes'),
+                    NumberField::new('nbOfChildren', 'Nombre d\'enfants'),
                     MoneyField::new('price', 'Prix')
                         ->setStoredAsCents(false)
                         ->setCurrency('EUR'),
