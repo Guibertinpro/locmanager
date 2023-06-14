@@ -51,7 +51,8 @@ class ReservationCrudController extends AbstractCrudController
             return [
                 'id' => $reservation->getId(),
             ];
-        });
+        })
+        ->setHtmlAttributes(['target' => '_blank']);
 
         // Send contract action
         $sendContract = Action::new('sendContract', 'Envoyer le contrat par mail', 'fa fa-paper-plane')->linkToRoute('app_reservation_send_contract', function (Reservation $reservation): array {
