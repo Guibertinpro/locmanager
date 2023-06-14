@@ -149,6 +149,7 @@ class ReservationCrudController extends AbstractCrudController
                     AssociationField::new('apartment', 'Appartement'),
                     DateTimeField::new('startAt', 'Début')->setFormat('medium')->setColumns(6),
                     DateTimeField::new('endAt', 'Fin')->setFormat('medium')->setColumns(6),
+                    DateTimeField::new('dateLeftToPay', 'Date limite réception caution et solde')->setFormat('medium')->setColumns(6),
                 
                 FormField::addTab('Détails réservation'),
                 /* FormField::addPanel('Détails réservation')->setColumns(6), */
