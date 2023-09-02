@@ -41,8 +41,8 @@ class ReservationFinishedCommand extends Command
 
     $reservationStateRespository = $em->getRepository(ReservationState::class);
     $configurationRepository = $em->getRepository(Configuration::class);
-    $idConigurationStateReservationFinished = $configurationRepository->find('3')->getValue();
-    $stateOk = $reservationStateRespository->find($idConigurationStateReservationFinished);
+    $idConfigurationStateReservationFinished = $configurationRepository->find('3')->getValue();
+    $stateOk = $reservationStateRespository->find($idConfigurationStateReservationFinished);
 
     foreach ($reservations as $reservation) {
       $endAt = $reservation->getEndAt();
