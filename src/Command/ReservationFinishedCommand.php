@@ -55,20 +55,21 @@ class ReservationFinishedCommand extends Command
       $nowMonth = $now->format('m');
       $nowYear = $now->format('Y');
 
-      if ($endAtDay >= $nowDay && $endAtMonth >= $nowMonth && $endAtYear >= $nowYear) {
+      if ($endAtYear >= $nowYear) {
+        if ($endAtMonth >= $nowMonth) {
+          if ($endAtDay >= $nowDay) {
+            $reservation->setState($stateOk);
+            $em->persist($reservation);
+            $em->flush();
 
-        $reservation->setState($stateOk);
-        $em->persist($reservation);
-        $em->flush();
-
-        $output->write('Réservation n°'. $reservation->getId() .' terminée');
-        return Command::SUCCESS;
-      } else {
-        $output->write('Aucune réservation terminée le ' . $nowDay . '/' . $nowMonth . '/' . $nowYear);
-        return Command::FAILURE;
+            $output->write('Réservation n°'. $reservation->getId() .' terminée');
+            return Command::SUCCESS;
+          } else {
+            $output->write('Aucune réservation terminée le ' . $nowDay . '/' . $nowMonth . '/' . $nowYear);
+            return Command::FAILURE;
+          }
+        }
       }
     }
-    
-    
   }
 }
