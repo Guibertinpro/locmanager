@@ -55,7 +55,7 @@ class ReservationFinishedCommand extends Command
       $nowMonth = $now->format('m');
       $nowYear = $now->format('Y');
 
-      if ($endAtDay == $nowDay && $endAtMonth == $nowMonth && $endAtYear == $nowYear) {
+      if ($endAtDay >= $nowDay && $endAtMonth >= $nowMonth && $endAtYear >= $nowYear) {
 
         $reservation->setState($stateOk);
         $em->persist($reservation);
