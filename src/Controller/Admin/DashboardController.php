@@ -114,14 +114,62 @@ class DashboardController extends AbstractDashboardController
             $i = $i+1;
         }
 
-        // Create chart
-        $chart = $this->chartBuilder->createChart(Chart::TYPE_BAR);
-        $chart->setData([
+        // Create chart for current year statistics
+        $currentYearChart = $this->chartBuilder->createChart(Chart::TYPE_BAR);
+        $currentYearChart->setData([
             'labels' => ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
             'datasets' => $datasets,
         ]);
 
-        $chart->setOptions([
+        $currentYearChart->setOptions([
+            'scales' => [
+                'y' => [
+                    'suggestedMin' => 0,
+                    'suggestedMax' => 100,
+                ],
+            ],
+            'responsive' => true,
+            'maintainAspectRatio' => false,
+        ]);
+
+        // On veut un graphique par année regroupant le CA par appartement
+        // labels dynamique de année de départ 2022 jusqu'à année actuelle
+        // somme des ventes par appartement et par année
+
+        // Construct chart for year sales per apartment
+        $years = [];
+        $beginYear = 2022;
+        $now = new DateTime('now');
+        $actualYear = $now->format('Y');
+        $actualYearNumber = intval($actualYear);
+        for ($i = $beginYear; $i <= $actualYearNumber; $i++) {
+            $years[] = strval($i);
+        }
+        
+        $datasets = [];
+        $i = 0;
+        foreach ($apartments as $apartment) {
+            $yearData = [];
+            foreach ($years as $k => $v) {
+            $yearData[] = $this->reservationRepository->getTotalSalesByYearAndApartment($v, $apartment);
+            }
+            $datasets[] = [
+            'stack' => 'Stack '.$i,
+            'label' => $apartment->getName(),
+            'backgroundColor' => $apartment->getColor(),
+            'data' => $yearData,
+            ];
+            $i = $i+1;
+        }
+
+        // Create chart for sales per apartment per year
+        $chartSalesPerYearAndApartment = $this->chartBuilder->createChart(Chart::TYPE_BAR);
+        $chartSalesPerYearAndApartment->setData([
+            'labels' => $years,
+            'datasets' => $datasets,
+        ]);
+
+        $chartSalesPerYearAndApartment->setOptions([
             'scales' => [
                 'y' => [
                     'suggestedMin' => 0,
@@ -137,7 +185,11 @@ class DashboardController extends AbstractDashboardController
             'totalSales' => $total_sales,
             'reservations' => $reservationsData,
             'apartments' => $apartments,
-            'chart' => $chart
+            'currentYearChart' => $currentYearChart,
+            'chartSalesPerYearAndApartment' => $chartSalesPerYearAndApartment
         ]);
+
+        
+
     }
 }

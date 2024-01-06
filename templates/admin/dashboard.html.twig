@@ -66,8 +66,14 @@
     </div>
     <div class="my-5">
       <h5>Chiffres de l'année en cours</h5>
-      <div id="chart">
-        {{ render_chart(chart) }}
+      <div id="currentYearChart">
+        {{ render_chart(currentYearChart) }}
+      </div>
+    </div>
+    <div class="my-5">
+      <h5>Chiffres par année et par appartement</h5>
+      <div id="chartSalesPerYearAndApartment">
+        {{ render_chart(chartSalesPerYearAndApartment) }}
       </div>
     </div>
   </div>
