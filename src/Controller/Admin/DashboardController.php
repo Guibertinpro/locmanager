@@ -178,6 +178,16 @@ class DashboardController extends AbstractDashboardController
             ],
             'responsive' => true,
             'maintainAspectRatio' => false,
+            'plugins' => [
+                'datalabels' => [
+                    'anchor'=> 'end',
+                    'align'=> 'top',
+                    'font'=> [
+                        'weight'=> 'bold',
+                        'size'=> 16
+                    ]
+                ],
+            ],
         ]);
 
         return $this->render('admin/dashboard.html.twig', [

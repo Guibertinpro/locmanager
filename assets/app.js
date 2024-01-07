@@ -4,6 +4,7 @@ import './bootstrap';
 import { Tooltip, Toast, Popover } from 'bootstrap';
 import 'popper.js';
 import 'fullcalendar';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 const $ = require('jquery');
 $(function () {
@@ -61,6 +62,12 @@ $(function () {
         }
       });
     });
+  });
+
+  // register globally for all charts
+  document.addEventListener('chartjs:init', function (event) {
+    const Chart = event.detail.Chart;
+    Chart.register(ChartDataLabels);
   });
 
 });
