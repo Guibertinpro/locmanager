@@ -178,7 +178,7 @@ class DashboardController extends AbstractDashboardController
                 ],
             ],
             'responsive' => true,
-            'maintainAspectRatio' => false,
+            'maintainAspectRatio' => true,
             'plugins' => [
                 'datalabels' => [
                     'anchor'=> 'end',
