@@ -170,8 +170,9 @@ class DashboardController extends AbstractDashboardController
         ]);
 
         $chartSalesPerYearAndApartment->setOptions([
+            'indexAxis' => 'y',
             'scales' => [
-                'y' => [
+                'x' => [
                     'suggestedMin' => 0,
                     'suggestedMax' => 100,
                 ],
