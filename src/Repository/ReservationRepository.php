@@ -121,6 +121,32 @@ class ReservationRepository extends ServiceEntityRepository
         ;
     }
 
+    public function getTotalSalesCurrentYear()
+    {
+        $now = new DateTime('now');
+        $year = $now->format('Y');
+        return $this->createQueryBuilder('r')
+            ->select('SUM(r.price)')
+            ->where('YEAR(r.startAt) = :year')
+            ->setParameter('year', $year)
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
+
+    public function getTotalReservationsCurrentYear(): int
+    {
+        $now = new DateTime('now');
+        $year = $now->format('Y');
+        return $this->createQueryBuilder('r')
+            ->select('COUNT(r.id)')
+            ->where('YEAR(r.startAt) = :year')
+            ->setParameter('year', $year)
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
+
     public function getTotalSalesByYearAndApartment($year, $apartment = null)
     {
         return $this->createQueryBuilder('r')

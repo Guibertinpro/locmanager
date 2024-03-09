@@ -57,6 +57,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Réservations', 'fas fa-calendar', Reservation::class);
         yield MenuItem::linkToCrud('Appartements', 'fas fa-hotel', Apartment::class);
         yield MenuItem::linkToCrud('Clients', 'fas fa-user', Client::class);
+        yield MenuItem::linktoRoute('Statistiques', 'fa fa-chart-simple', 'statistics')->setPermission('ROLE_ADMIN');
         yield MenuItem::linkToCrud('Configurations', 'fas fa-gears', Configuration::class);
         yield MenuItem::linkToCrud('Etats de réservation', 'fas fa-list', ReservationState::class);
     }
@@ -67,6 +68,8 @@ class DashboardController extends AbstractDashboardController
         // Get data
         $number_of_reservations = $this->reservationRepository->getTotalReservations();
         $total_sales = $this->reservationRepository->getTotalReservationsSales();
+        $total_sales_current_year = $this->reservationRepository->getTotalSalesCurrentYear();
+        $total_reservations_current_year = $this->reservationRepository->getTotalReservationsCurrentYear();
         $apartments = $this->apartmentRepository->findAll();
         $reservations = $this->reservationRepository->findAll();
 
@@ -194,6 +197,8 @@ class DashboardController extends AbstractDashboardController
         return $this->render('admin/dashboard.html.twig', [
             'nbReservations' => $number_of_reservations,
             'totalSales' => $total_sales,
+            'totalSalesCurrentYear' => $total_sales_current_year,
+            'totalReservationsCurrentYear' => $total_reservations_current_year,
             'reservations' => $reservationsData,
             'apartments' => $apartments,
             'currentYearChart' => $currentYearChart,
