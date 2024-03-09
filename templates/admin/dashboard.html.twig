@@ -53,22 +53,26 @@
   <div class="block-content">
     <div class="my-3">
       <h5>Statistiques globales</h5>
-      <div class="d-flex justify-content-around align-items-center mb-3">
-        <div class="circle-stat text-center d-flex justify-content-center align-items-center flex-column">
-          <p class="fw-bold mb-2">Total ventes année en cours</p>
-          <p class="h1 mb-0">{{ totalSalesCurrentYear|format_currency('EUR', {rounding_mode: 'floor'}) }}</p>
+      <div class="d-flex flex-wrap justify-content-around align-items-center mb-3">
+        <div class="d-flex justify-content-around align-items-center mb-3">
+          <div class="circle-stat text-center d-flex justify-content-center align-items-center flex-column p-2">
+            <p class="fw-bold mb-2">Total ventes année en cours</p>
+            <p class="h1 mb-0">{{ totalSalesCurrentYear|format_currency('EUR', {rounding_mode: 'floor'}) }}</p>
+          </div>
+          <div class="circle-stat text-center d-flex justify-content-center align-items-center flex-column p-2">
+            <p class="fw-bold mb-2">Réservations année en cours</p>
+            <p class="h1 mb-0">{{ totalReservationsCurrentYear }}</p>
+          </div>
         </div>
-        <div class="circle-stat text-center d-flex justify-content-center align-items-center flex-column">
-          <p class="fw-bold mb-2">Réservations année en cours</p>
-          <p class="h1 mb-0">{{ totalReservationsCurrentYear }}</p>
-        </div>
-        <div class="circle-stat text-center d-flex justify-content-center align-items-center flex-column">
-          <p class="fw-bold mb-2">Total ventes</p>
-          <p class="h1 mb-0">{{ totalSales|format_currency('EUR', {rounding_mode: 'floor'}) }}</p>
-        </div>
-        <div class="circle-stat text-center d-flex justify-content-center align-items-center flex-column">
-          <p class="fw-bold mb-2">Réservations totales</p>
-          <p class="h1 mb-0">{{ nbReservations }}</p>
+        <div class="d-flex justify-content-around align-items-center mb-3">
+          <div class="circle-stat text-center d-flex justify-content-center align-items-center flex-column p-2">
+            <p class="fw-bold mb-2">Total ventes</p>
+            <p class="h1 mb-0">{{ totalSales|format_currency('EUR', {rounding_mode: 'floor'}) }}</p>
+          </div>
+          <div class="circle-stat text-center d-flex justify-content-center align-items-center flex-column p-2">
+            <p class="fw-bold mb-2">Réservations totales</p>
+            <p class="h1 mb-0">{{ nbReservations }}</p>
+          </div>
         </div>
       </div>
     </div>
