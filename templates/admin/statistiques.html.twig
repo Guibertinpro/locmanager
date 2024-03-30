@@ -1,0 +1,31 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block main %}
+  <div class="block-content">
+    <div class="my-3">
+      <h5>Statistiques globales</h5>
+      <div class="d-flex justify-content-around align-items-center mb-3">
+        <div class="circle-stat text-center d-flex justify-content-center align-items-center flex-column">
+          <p class="fw-bold mb-2">Total ventes</p>
+          <p class="h1 mb-0">{{ totalSales|format_currency('EUR', {rounding_mode: 'floor'}) }}</p>
+        </div>
+        <div class="circle-stat text-center d-flex justify-content-center align-items-center flex-column">
+          <p class="fw-bold mb-2">Réservations totales</p>
+          <p class="h1 mb-0">{{ nbReservations }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="my-5">
+      <h5>Chiffres de l'année en cours</h5>
+      <div id="currentYearChart">
+        {{ render_chart(currentYearChart) }}
+      </div>
+    </div>
+    <div class="my-5">
+      <h5>Chiffres par année et par appartement</h5>
+      <div id="chartSalesPerYearAndApartment">
+        {{ render_chart(chartSalesPerYearAndApartment) }}
+      </div>
+    </div>
+  </div>
+{% endblock %}
