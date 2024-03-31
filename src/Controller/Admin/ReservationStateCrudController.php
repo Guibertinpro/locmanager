@@ -7,6 +7,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ColorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
@@ -43,7 +44,11 @@ class ReservationStateCrudController extends AbstractCrudController
                 TextField::new('name', 'Dénomination'),
                 TextField::new('color', 'Couleur')->setTemplatePath("admin/fields/index_reservation_state_color.html.twig"),
             ];
-        
+        } else {
+            return [
+                TextField::new('name', 'Dénomination'),
+                ColorField::new('color', 'Couleur'),
+            ];
         }
     }
 }
