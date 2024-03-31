@@ -23,9 +23,9 @@ class Reservation
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $endAt = null;
 
-    #[ORM\ManyToOne(targetEntity: Apartment::class)]
+    #[ORM\ManyToOne(targetEntity: Apartment::class, fetch: 'EAGER')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Apartment $apartment = null;
+    private Apartment $apartment;
 
     #[ORM\Column]
     private ?int $nbOfAdults = null;
@@ -36,13 +36,13 @@ class Reservation
     #[ORM\Column(length: 255)]
     private ?string $price = null;
 
-    #[ORM\ManyToOne(targetEntity: ReservationState::class)]
+    #[ORM\ManyToOne(targetEntity: ReservationState::class, fetch: 'EAGER')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?ReservationState $state = null;
+    private ReservationState $state;
 
-    #[ORM\ManyToOne(inversedBy: 'reservations')]
+    #[ORM\ManyToOne(targetEntity: Client::class, inversedBy: 'reservations', fetch: 'EAGER')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Client $client = null;
+    private Client $client;
 
     #[ORM\Column(length: 50)]
     private ?string $arrhes = null;

@@ -29,7 +29,7 @@ class ReservationController extends AbstractController
   public function generatePdfContract(int $id, ReservationRepository $reservationRepository, ClientRepository $clientRepository, PdfService $pdfService)
   {
     $reservation = $reservationRepository->find($id);
-    $apartment = strtolower($reservation->getApartment()->getName());
+    $apartment = $reservation->getApartment();
     $client = $clientRepository->find($reservation->getClient()->getId());
 
     // Get images
