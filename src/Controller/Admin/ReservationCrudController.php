@@ -92,15 +92,8 @@ class ReservationCrudController extends AbstractCrudController
         if (Crud::PAGE_INDEX === $pageName) {
             return [
                 IdField::new('id')->hideOnForm(),
-<<<<<<< HEAD
                 AssociationField::new('client', 'Client')/* ->setTemplatePath("admin/fields/index_client_name.html.twig") */,
                 AssociationField::new('apartment', 'Appartement')/* ->setTemplatePath("admin/fields/index_apartment_name.html.twig") */,
-=======
-                /* AssociationField::new('client', 'Client')->setTemplatePath("admin/fields/index_client_name.html.twig"), */
-                AssociationField::new('client', 'Client'),
-                /* AssociationField::new('apartment', 'Appartement')->setTemplatePath("admin/fields/index_apartment_name.html.twig"), */
-                AssociationField::new('apartment', 'Appartement'),
->>>>>>> 25ead8818f7e2304628c7e61b24dfea2ebafbfb4
                 DateTimeField::new('startAt', 'Début')->setFormat('medium')->setColumns(6),
                 DateTimeField::new('endAt', 'Fin')->setFormat('medium')->setColumns(6),
                 FormField::addTab('Détails réservation'),

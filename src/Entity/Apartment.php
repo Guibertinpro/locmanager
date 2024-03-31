@@ -17,11 +17,7 @@ class Apartment
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-<<<<<<< HEAD
     private ?string $name = '';
-=======
-    private $name = '';
->>>>>>> 25ead8818f7e2304628c7e61b24dfea2ebafbfb4
 
     #[ORM\Column(length: 255)]
     private ?string $address = null;
