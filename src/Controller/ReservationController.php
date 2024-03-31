@@ -69,7 +69,7 @@ class ReservationController extends AbstractController
         break;
     }
 
-    $html =  $this->renderView($template, $data);
+    $html = $this->renderView($template, $data);
     $pdfService->showPdfFile($html, $reservation->getId());
   }
 

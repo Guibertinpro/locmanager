@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\ReservationStateRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+use function PHPUnit\Framework\isNull;
+
 #[ORM\Entity(repositoryClass: ReservationStateRepository::class)]
 class ReservationState
 {
@@ -14,7 +16,7 @@ class ReservationState
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $name = null;
+    private $name = '';
 
     #[ORM\Column(length: 255)]
     private ?string $color = null;
@@ -48,8 +50,8 @@ class ReservationState
         return $this;
     }
 
-    public function __toString()
+    /* public function __toString()
     {
         return $this->getName();
-    }
+    } */
 }

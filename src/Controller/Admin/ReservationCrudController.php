@@ -92,8 +92,10 @@ class ReservationCrudController extends AbstractCrudController
         if (Crud::PAGE_INDEX === $pageName) {
             return [
                 IdField::new('id')->hideOnForm(),
-                AssociationField::new('client', 'Client')->setTemplatePath("admin/fields/index_client_name.html.twig"),
-                AssociationField::new('apartment', 'Appartement')->setTemplatePath("admin/fields/index_apartment_name.html.twig"),
+                /* AssociationField::new('client', 'Client')->setTemplatePath("admin/fields/index_client_name.html.twig"), */
+                AssociationField::new('client', 'Client'),
+                /* AssociationField::new('apartment', 'Appartement')->setTemplatePath("admin/fields/index_apartment_name.html.twig"), */
+                AssociationField::new('apartment', 'Appartement'),
                 DateTimeField::new('startAt', 'Début')->setFormat('medium')->setColumns(6),
                 DateTimeField::new('endAt', 'Fin')->setFormat('medium')->setColumns(6),
                 FormField::addTab('Détails réservation'),
@@ -114,7 +116,8 @@ class ReservationCrudController extends AbstractCrudController
         } elseif(Crud::PAGE_DETAIL === $pageName) {
             return [
                 FormField::addPanel('Détails réservation'),
-                    AssociationField::new('state', 'Statut')->setTemplatePath("admin/fields/detail_reservation_state.html.twig"),
+                    /* AssociationField::new('state', 'Statut')->setTemplatePath("admin/fields/detail_reservation_state.html.twig"), */
+                    AssociationField::new('state', 'Statut'),
                     DateTimeField::new('startAt', 'Début')->setFormat('medium'),
                     DateTimeField::new('endAt', 'Fin')->setFormat('medium'),
                     BooleanField::new('cautionValidated', 'Caution reçue'),
