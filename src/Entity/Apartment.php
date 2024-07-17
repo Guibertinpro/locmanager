@@ -55,13 +55,13 @@ class Apartment
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $localisationDescription = null;
 
-    #[ORM\Column(length: 10, nullable: true)]
+    #[ORM\Column(length: 50, nullable: true)]
     private ?string $firstCode = null;
 
-    #[ORM\Column(length: 10, nullable: true)]
+    #[ORM\Column(length: 50, nullable: true)]
     private ?string $secondCode = null;
 
-    #[ORM\Column(length: 10, nullable: true)]
+    #[ORM\Column(length: 50, nullable: true)]
     private ?string $thirdCode = null;
 
     public function getId(): ?int
