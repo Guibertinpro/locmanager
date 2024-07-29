@@ -73,6 +73,7 @@ class ClientCrudController extends AbstractCrudController
                 TextField::new('complementAddress', 'Complément d\'adresse'),
                 TextField::new('postcode', 'Code postal'),
                 TextField::new('city', 'Ville'),
+                DateField::new('dateCreate','Date de création')
             ];
         }
     }
