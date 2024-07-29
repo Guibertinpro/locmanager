@@ -29,6 +29,7 @@
               <td>{{ client.firstname }} {{ client.lastname }}</td>
               <td>{{ client.email }}</td>
               <td>{{ client.phone }}</td>
+              <td>{{ client.dateCreate }}</td>
               <td>
                 <a href="{{ path('app_client_view', {'id': client.id}) }}" class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-magnifying-glass-plus"></i></a>
                 <a href="{{ path('app_client_update', {'id': client.id}) }}" class="btn btn-sm btn-outline-warning"><i class="fa-solid fa-pen-to-square"></i></a>

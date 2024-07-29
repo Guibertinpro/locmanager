@@ -9,6 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -39,6 +40,7 @@ class ClientCrudController extends AbstractCrudController
                 TextField::new('lastname', 'Nom'),
                 TextField::new('email', 'Email'),
                 TextField::new('phone', 'Téléphone'),
+                DateField::new('dateCreate','Date de création')
             ];
         
         } elseif (Crud::PAGE_DETAIL === $pageName) {
