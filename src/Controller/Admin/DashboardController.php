@@ -144,8 +144,8 @@ class DashboardController extends AbstractDashboardController
         $beginYear = 2022;
         $now = new DateTime('now');
         $actualYear = $now->format('Y');
-        $actualYearNumber = intval($actualYear);
-        for ($i = $actualYearNumber; $i >= $beginYear; $i--) {
+        $nextYearNumber = intval($actualYear) + 1;
+        for ($i = $nextYearNumber; $i >= $beginYear; $i--) {
             $years[] = strval($i);
         }
         
